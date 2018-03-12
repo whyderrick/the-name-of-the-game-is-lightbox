@@ -8,17 +8,25 @@ img {
   width: 100px;
   height: 100px;
 }
+
 header {
   grid-area: header;
 }
 
 main {
-  grid-are: main;
+  grid-area: main;
+  width: 80%;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
 }
 
 .container {
   display: grid;
-  grid-template-rows: 150px 1fr 1fr 1fr;
+  justify-items: center;
+  grid-template-rows: 150px auto 100px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas:
     "header header header header"
