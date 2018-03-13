@@ -18,6 +18,11 @@ main {
   width: 80%;
 }
 
+footer {
+  grid-area: footer;
+  align-self: end;
+}
+
 .row {
   display: flex;
   justify-content: space-between;
@@ -26,10 +31,11 @@ main {
 .container {
   display: grid;
   justify-items: center;
-  grid-template-rows: 150px auto 100px;
+  align-content: end;
+  grid-template-rows: 150px 1fr 100px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-areas:
     "header header header header"
     "main main main main"
-    "footer footer footer footer"
+    "footer footer footer footer";
 }
