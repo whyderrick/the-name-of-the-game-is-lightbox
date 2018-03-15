@@ -2,7 +2,7 @@
 const defaultParams = {
   method: "flickr.interestingness.getList",
   format: "json",
-  api_key: "foo_key",
+  api_key: "2f8a358584fb543dd1962f3998f64e0b",
   extras: "url_sq,url_l",
   per_page: "20",
   page: 1,

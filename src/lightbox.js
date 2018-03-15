@@ -35,17 +35,24 @@ class Lightbox {
       src: imageData.url_l,
       height: imageData.height_l,
       width: imageData.width_l,
+      title: imageData.title,
     };
   }
 
   updateImage(index) {
     this.currentIndex = index;
     const imageData = this.currentImage();
+
+    const titleNode = document.querySelector(
+      `${this.selector} [data-role='image-title']`
+    );
     const imageNode = document.querySelector(`${this.selector} img`)
 
     imageNode.setAttribute("src", imageData.src);
     imageNode.setAttribute("height", imageData.height);
     imageNode.setAttribute("width", imageData.width);
+
+    titleNode.innerText = imageData.title
   }
 
   // Listeners
