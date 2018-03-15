@@ -6,20 +6,26 @@ const lightbox = new Lightbox({
   toggleClass: "lightbox--container__active",
 });
 
+const loadPhotos = (data= []) => {
+  lightbox.images = data;
+  loadThumbnails(data);
+}
+
 const loadThumbnails = (data = []) => {
   document.querySelectorAll(".thumbnail").forEach((el) => {
-    const index = el.getAttribute("data-thumbnail");
-    // temp variable until we're loading
-    const src = data[index] || "https:\/\/farm5.staticflickr.com\/4772\/38982783700_0e66a78cd1_s.jpg"
+    const index = el.getAttribute("data-thumbnail") - 1;
 
     el.querySelector("img").setAttribute(
       "src",
-      src
+      // "https:\/\/farm5.staticflickr.com\/4772\/38982783700_0e66a78cd1_s.jpg"
+      data[index]['url_sq']
     );
 
+
     el.addEventListener("click", () => {
-      lightbox.toggle();
       lightbox.currentIndex = index;
+      lightbox.updateImage();
+      lightbox.toggle();
     });
   });
 };
@@ -27,6 +33,7 @@ const loadThumbnails = (data = []) => {
 // Still need to define all listeners for lightbox on clicks and keypresses
 
 document.addEventListener("DOMContentLoaded", async function() {
-  //const photoData = await getPhotos();
-  loadThumbnails();
+  const photoData = await getPhotos();
+  loadPhotos(photoData);
+  // loadThumbnails();
 });

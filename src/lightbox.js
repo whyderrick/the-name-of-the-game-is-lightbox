@@ -23,7 +23,7 @@ class Lightbox {
   }
 
   currentImage() {
-    const imageData = this.images[this.currentIndex - 1];
+    const imageData = this.images[this.currentIndex];
     return {
       src: imageData.url_l,
       height: imageData.height_l,
@@ -31,7 +31,7 @@ class Lightbox {
     };
   }
 
-  updateImage({ src, height, width } = currentImage()) {
+  updateImage({ src, height, width } = this.currentImage()) {
     const image = document.querySelector(`${this.selector} img`)
 
     image.setAttribute("src", src);
