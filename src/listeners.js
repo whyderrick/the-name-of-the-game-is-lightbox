@@ -18,8 +18,8 @@ const loadThumbnails = (data = []) => {
     );
 
     el.addEventListener("click", () => {
-      el.classList.add("lightbox--image__active");
       lightbox.toggle();
+      lightbox.currentIndex = index;
     });
   });
 };
