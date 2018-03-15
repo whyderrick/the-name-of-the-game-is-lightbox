@@ -14,17 +14,12 @@ const loadPhotos = (data= []) => {
 const loadThumbnails = (data = []) => {
   document.querySelectorAll(".thumbnail").forEach((el) => {
     const index = el.getAttribute("data-thumbnail") - 1;
+    const thumbnailSrc = data[index]['url_sq']
 
-    el.querySelector("img").setAttribute(
-      "src",
-      // "https:\/\/farm5.staticflickr.com\/4772\/38982783700_0e66a78cd1_s.jpg"
-      data[index]['url_sq']
-    );
-
+    el.querySelector("img").setAttribute( "src", thumbnailSrc);
 
     el.addEventListener("click", () => {
-      lightbox.currentIndex = index;
-      lightbox.updateImage();
+      lightbox.updateImage(index);
       lightbox.toggle();
     });
   });
@@ -33,6 +28,7 @@ const loadThumbnails = (data = []) => {
 // Still need to define all listeners for lightbox on clicks and keypresses
 
 document.addEventListener("DOMContentLoaded", async function() {
+  lightbox.attachListeners();
   const photoData = await getPhotos();
   loadPhotos(photoData);
   // loadThumbnails();

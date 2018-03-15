@@ -1,6 +1,7 @@
 class Lightbox {
-  constructor({ selector, toggleClass }) {
+  constructor({ selector, toggleClass, maxIndex = 16 }) {
     this.currentIndex = null;
+    this.maxIndex = maxIndex;
     this.images = [];
     this.selector = selector;
     this.toggleClass = toggleClass;
@@ -13,13 +14,19 @@ class Lightbox {
   }
 
   next() {
-    this.currentIndex += 1;
-    this.updateImage();
+    if (this.currentIndex === this.maxIndex) {
+      this.currentIndex = 0;
+    } else {
+      this.updateImage(this.currentIndex + 1);
+    }
   }
 
   previous() {
-    this.currentIndex -= 1;
-    this.updateImage();
+    if (this.currentIndex === 0) {
+      this.currentIndex = this.maxIndex;
+    } else {
+      this.updateImage(this.currentIndex - 1);
+    }
   }
 
   currentImage() {
@@ -31,13 +38,28 @@ class Lightbox {
     };
   }
 
-  updateImage({ src, height, width } = this.currentImage()) {
-    const image = document.querySelector(`${this.selector} img`)
+  updateImage(index) {
+    this.currentIndex = index;
+    const imageData = this.currentImage();
+    const imageNode = document.querySelector(`${this.selector} img`)
 
-    image.setAttribute("src", src);
-    image.setAttribute("height", height);
-    image.setAttribute("width", width);
+    imageNode.setAttribute("src", imageData.src);
+    imageNode.setAttribute("height", imageData.height);
+    imageNode.setAttribute("width", imageData.width);
   }
+
+  // Listeners
+  attachListeners() {
+    document.querySelector(`${this.selector} .lightbox--button__close`)
+      .addEventListener("click", () => { this.toggle() });
+
+    document.querySelector(`${this.selector} .lightbox--button__next`)
+      .addEventListener("click", () => { this.next() });
+
+    document.querySelector(`${this.selector} .lightbox--button__previous`)
+      .addEventListener("click", () => { this.previous() });
+  }
+
 };
 
 export default Lightbox;
