@@ -54,22 +54,25 @@ footer {
     &__active {
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      justify-content: space-between;
     }
 
     img {
       max-width: 90%;
-      max-height: 90%;
+      max-height: 88vh;
       width: auto;
       height: auto;
-      max-height: 750px;
       margin: 2%;
       box-sizing: border-box;
     }
   }
 
+  &--image-container {
+    height: 100vh;
+  }
+
   &--title {
-    //font: 24px;
+    height: 10vh;
   }
 
   &--button {

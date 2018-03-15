@@ -46,13 +46,13 @@ class Lightbox {
     const titleNode = document.querySelector(
       `${this.selector} [data-role='image-title']`
     );
-    const imageNode = document.querySelector(`${this.selector} img`)
+    const imageNode = document.querySelector(`${this.selector} img`);
 
     imageNode.setAttribute("src", imageData.src);
     imageNode.setAttribute("height", imageData.height);
     imageNode.setAttribute("width", imageData.width);
 
-    titleNode.innerText = imageData.title
+    titleNode.innerText = imageData.title;
   }
 
   // Listeners
@@ -66,7 +66,6 @@ class Lightbox {
     document.querySelector(`${this.selector} .lightbox--button__previous`)
       .addEventListener("click", () => { this.previous() });
   }
-
-};
+}
 
 export default Lightbox;

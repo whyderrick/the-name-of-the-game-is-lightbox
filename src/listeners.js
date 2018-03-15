@@ -27,7 +27,7 @@ const loadThumbnails = (data = []) => {
 
 // Still need to define all listeners for lightbox on clicks and keypresses
 
-document.addEventListener("DOMContentLoaded", async function() {
+document.addEventListener("DOMContentLoaded", async () => {
   lightbox.attachListeners();
   const photoData = await getPhotos();
   loadPhotos(photoData);
