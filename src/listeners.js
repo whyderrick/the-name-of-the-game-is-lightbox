@@ -8,7 +8,8 @@ const loadThumbnails = (data = []) => {
       data[index] || "https:\/\/farm5.staticflickr.com\/4772\/38982783700_0e66a78cd1_s.jpg"
     );
     el.addEventListener("click", () => {
-      el.classList.add("lightbox");
+
+      el.classList.add("lightbox--image__active");
     });
   });
 };
