@@ -1,5 +1,5 @@
-import { flickrCall } from "./flickr.js";
+import { getPhotos } from "./flickr.js";
 
-document.addEventListener("DOMContentLoaded", function() {
-  console.log(flickrCall());
+document.addEventListener("DOMContentLoaded", async function() {
+  const photoData = await getPhotos();
 });
