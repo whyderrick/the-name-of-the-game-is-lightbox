@@ -1,5 +1,6 @@
 class Lightbox {
-  constructor({ selector, toggleClass, maxIndex = 16 }) {
+  constructor({ selector, toggleClass, maxIndex = 15 }) {
+    this.isOpen = false;
     this.currentIndex = null;
     this.maxIndex = maxIndex;
     this.images = [];
@@ -8,6 +9,7 @@ class Lightbox {
   }
 
   toggle() {
+    this.isOpen = !this.isOpen;
     document
       .querySelector(this.selector)
       .classList.toggle(this.toggleClass);
@@ -15,7 +17,7 @@ class Lightbox {
 
   next() {
     if (this.currentIndex === this.maxIndex) {
-      this.currentIndex = 0;
+      this.updateImage(0);
     } else {
       this.updateImage(this.currentIndex + 1);
     }
@@ -23,7 +25,7 @@ class Lightbox {
 
   previous() {
     if (this.currentIndex === 0) {
-      this.currentIndex = this.maxIndex;
+      this.updateImage(this.maxIndex);
     } else {
       this.updateImage(this.currentIndex - 1);
     }
@@ -33,8 +35,6 @@ class Lightbox {
     const imageData = this.images[this.currentIndex];
     return {
       src: imageData.url_l,
-      height: imageData.height_l,
-      width: imageData.width_l,
       title: imageData.title,
     };
   }
@@ -49,14 +49,35 @@ class Lightbox {
     const imageNode = document.querySelector(`${this.selector} img`);
 
     imageNode.setAttribute("src", imageData.src);
-    imageNode.setAttribute("height", imageData.height);
-    imageNode.setAttribute("width", imageData.width);
 
     titleNode.innerText = imageData.title;
   }
 
   // Listeners
   attachListeners() {
+    this.keyupListeners();
+    this.clickListeners();
+  }
+
+  keyupListeners() {
+    document.addEventListener("keyup", (e) => {
+      if(this.isOpen) {
+        switch(e.key) {
+        case "Escape":
+          this.toggle();
+          break;
+        case "ArrowLeft":
+          this.previous();
+          break;
+        case "ArrowRight":
+          this.next();
+          break;
+        }
+      }
+    });
+  }
+
+  clickListeners() {
     document.querySelector(`${this.selector} .lightbox--button__close`)
       .addEventListener("click", () => { this.toggle() });
 

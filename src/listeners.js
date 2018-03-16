@@ -1,5 +1,6 @@
 import { getPhotos } from "./flickr.js";
 import Lightbox from "./lightbox.js";
+import startingPhoto from "./assets/images/cape_photo.jpg"
 
 const lightbox = new Lightbox({
   selector: ".lightbox--container",
